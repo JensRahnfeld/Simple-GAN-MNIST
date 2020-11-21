@@ -95,6 +95,9 @@ def main(args):
 
     steps_per_epoch = len(train_loader)
 
+    msg = ["\t{0}: {1}".format(key, val) for key, val in params.items()]
+    print("hyperparameters: \n" + "\n".join(msg))
+
     # main training loop
     for n in range(params["num_epochs"]):
         loader = iter(train_loader)
