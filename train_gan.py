@@ -117,7 +117,7 @@ def main(args):
         torch.save(discriminator.state_dict(), args.o + ".discriminator." + str(n) + ".tmp")
 
         # eval
-        latent = torch.randn(8, params["dim_latent"]).cuda()
+        latent = torch.randn(16, params["dim_latent"]).cuda()
         imgs_fake = generator(latent)
         writer.add_images("generated fake images", imgs_fake, n)
             
