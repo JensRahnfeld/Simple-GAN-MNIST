@@ -10,6 +10,8 @@ Pytorch implementation of a simple Generative Adversarial Network on the MNIST d
 Make sure to download the MNIST dataset.
 
 # 1) Hyperparameters
+Specify hyperparameters inside a .json file, e.g.:
+
 ```json
 {
     "dim_latent": 100,
@@ -23,6 +25,13 @@ Make sure to download the MNIST dataset.
 ```
 
 # 2) Training
+Train the model:
 ```
 python3 train_gan.py --datadir <path_to_mnist>
 ```
+Alternatively you may want to specify 
+- path to your custom set of hyperparameters ```--params```
+- log directory ```--logdir```
+- model directory ```--modeldir```
+- model output name ```-o```
+- training device ```--device``` [specify None for cpu]
