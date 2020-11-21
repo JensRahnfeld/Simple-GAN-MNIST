@@ -17,15 +17,23 @@ class Generator(nn.Module):
                                             kernel_size=4, stride=2, padding=1)
         self.conv = nn.Conv2d(self.layers[2], 1, kernel_size=7, stride=1, padding=3)
 
+        self.norm0 = nn.BatchNorm2d(self.layers[0])
+        self.norm1 = nn.BatchNorm2d(self.layers[1])
+        self.norm2 = nn.BatchNorm2d(self.layers[2])
+
     def forward(self, x):
         batch_size = x.size(0)
         
         x = F.relu(self.fc(x))
         x = x.view(batch_size, self.layers[0], 7, 7)
-
+        
+        x = self.norm0(x)
         x = F.leaky_relu(self.deconv0(x), negative_slope=0.2)
+        
+        x = self.norm1(x)
         x = F.leaky_relu(self.deconv1(x), negative_slope=0.2)
 
+        x = self.norm2(x)
         img = torch.sigmoid(self.conv(x))
 
         return img
