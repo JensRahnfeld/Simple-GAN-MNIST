@@ -17,9 +17,9 @@ class Generator(nn.Module):
                                             kernel_size=4, stride=2, padding=1)
         self.conv = nn.Conv2d(self.layers[2], 1, kernel_size=7, stride=1, padding=3)
 
-        self.norm0 = nn.BatchNorm2d(self.layers[0])
-        self.norm1 = nn.BatchNorm2d(self.layers[1])
-        self.norm2 = nn.BatchNorm2d(self.layers[2])
+        self.norm0 = nn.InstanceNorm2d(self.layers[0])
+        self.norm1 = nn.InstanceNorm2d(self.layers[1])
+        self.norm2 = nn.InstanceNorm2d(self.layers[2])
 
     def forward(self, x):
         batch_size = x.size(0)
