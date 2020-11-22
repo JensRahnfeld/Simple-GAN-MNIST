@@ -35,3 +35,9 @@ Alternatively you may want to specify
 - model directory ```--modeldir```
 - model output name ```-o```
 - training device ```--device``` [specify None for cpu]
+
+# 3) Inspecting Results
+Learning curves for the discriminator and generator can be inspected using
+tensorboard. 
+![fake images](assets/fake_numbers.png)
+*Example fake numbers from training with the hyperparameters specifed above.*
