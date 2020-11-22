@@ -35,6 +35,7 @@ Alternatively you may want to specify
 - model directory ```--modeldir```
 - model output name ```-o```
 - training device ```--device``` [specify None for cpu]
+- number of fake sample outputs ```num_fake_samples_eval```
 
 # 3) Inspecting Results
 Learning curves for the discriminator and generator can be inspected using
