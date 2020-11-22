@@ -5,5 +5,5 @@
     "beta_1": 0.5,
     "beta_2": 0.999,
     "num_epochs": 5,
-    "num_fake_samples": 30
+    "num_fake_samples": 25
 }
