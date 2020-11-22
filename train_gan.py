@@ -104,6 +104,7 @@ def main(args):
     for n in range(params["num_epochs"]):
         loader = iter(train_loader)
 
+        print("epoch: {0}/{1}".format(n+1, params["num_epochs"]))
         for i in tqdm.trange(steps_per_epoch):
             batch, _ = next(loader)
             if args.device is not None: batch = batch.cuda(args.device)
