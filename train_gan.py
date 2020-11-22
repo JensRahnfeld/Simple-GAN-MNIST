@@ -65,6 +65,8 @@ def get_args():
                         help="directory storing all during training saved models")
     parser.add_argument("-o", type=str, default="gan", help="model's name")
     parser.add_argument("--device", type=int, default=0, help="gpu device to use")
+    parser.add_argument("--num_fake_samples_eval", type=int, default=64,
+                        help="number of fake samples to output to tensorboard")
 
     return parser.parse_args()
 
@@ -117,9 +119,12 @@ def main(args):
         torch.save(discriminator.state_dict(), args.o + ".discriminator." + str(n) + ".tmp")
 
         # eval
-        latent = torch.randn(16, params["dim_latent"]).cuda()
-        imgs_fake = generator(latent)
-        writer.add_images("generated fake images", imgs_fake, n)
+        with torch.no_grad():
+            latent = torch.randn(args.num_fake_samples_eval, params["dim_latent"]).cuda()
+            imgs_fake = generator(latent)
+
+            writer.add_images("generated fake images", imgs_fake, n)
+            del latent, imgs_fake
             
     writer.close()
 
