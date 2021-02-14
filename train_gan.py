@@ -24,7 +24,7 @@ def update_discriminator(batch, discriminator, generator, optimizer, params):
     # predictions on generating distribution
     labels_real = torch.ones(batch_size, 1, device=batch.device)
     preds_real = discriminator(batch)
-    loss_real = F.binary_cross_entropy(preds_real, labels_real)
+    loss_real = F.binary_cross_entropy_with_logits(preds_real, labels_real)
 
     # predictions on fake distribution
     labels_fake = torch.zeros(batch_size, 1, device=batch.device)
@@ -32,7 +32,7 @@ def update_discriminator(batch, discriminator, generator, optimizer, params):
     batch_fake = generator(latent)
     
     preds_fake = discriminator(batch_fake.detach())
-    loss_fake = F.binary_cross_entropy(preds_fake, labels_fake)
+    loss_fake = F.binary_cross_entropy_with_logits(preds_fake, labels_fake)
     
     loss = loss_real + loss_fake
     loss.backward()
@@ -46,9 +46,9 @@ def update_generator(discriminator, generator, optimizer, params, device):
     labels_real = torch.ones(params["num_fake_samples"], 1, device=device)
     latent = torch.randn(params["num_fake_samples"], params["dim_latent"], device=device)
     batch_fake = generator(latent)
-    
+
     preds_fake = discriminator(batch_fake)
-    loss = F.binary_cross_entropy(preds_fake, labels_real)
+    loss = F.binary_cross_entropy_with_logits(preds_fake, labels_real)
     loss.backward()
     optimizer.step()
     
