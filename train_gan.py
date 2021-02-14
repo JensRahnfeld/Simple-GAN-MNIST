@@ -57,7 +57,7 @@ def update_generator(discriminator, generator, optimizer, params, device):
 def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--datadir", type=str, required=True, help="path to MNIST dataset folder")
-    parser.add_argument("--params", type=str, default="./examples/params.json",
+    parser.add_argument("--params", type=str, default="./hparams/params.json",
                         help="path to hyperparameters")
     parser.add_argument("--logdir", type=str, default="./tensorboard",
                         help="directory storing tensorboard logs")
